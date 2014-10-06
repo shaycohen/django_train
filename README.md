@@ -1,5 +1,5 @@
 Django Training
 
 
-- Notes
-REST Editor Online: http://json.parser.online.fr/
+- REST Parser Online: http://json.parser.online.fr/
+
