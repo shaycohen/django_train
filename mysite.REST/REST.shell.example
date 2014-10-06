@@ -1,0 +1,26 @@
+from polls.models import Question
+from polls.serializers import QuestionSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+q = Question.objects.get(pk=3)
+q
+serialized = QuestionSerializer(q)
+serialized.data
+cont = JSONRenderer().render(serialized.data)
+cont
+
+serialized = QuestionSerializer(Question.objects.all(), many=True)
+serialized.data
+cont = JSONRenderer().render(serialized.data)
+cont
+
+# DeSerialize
+from rest_framework.compat import BytesIO
+stream = BytesIO(cont)
+newdata = JSONParser().parse(stream)
+newdata
+
+
+# ModelSerializer
+sered = QuestionModelSerializer(q)
+
