@@ -2,10 +2,10 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
-
 from polls.models import Choice, Question
 
 from polls.serializers import QuestionModelSerializer
+#pip install djangorestframework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -16,14 +16,13 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-""" Just for class purpose """
 @csrf_exempt
 def question_list(request):
     if request.method == 'GET':
         questions = Question.objects.all()
         serializer = QuestionModelSerializer(questions, many=True)
         return JSONResponse(serializer.data)
-    elif request.methos == 'POST':
+    elif request.method == 'POST':
         postData = JSONParser().parse(request)
         serializer = QuestionModelSerializer(data=postData)
         if serializer.is_valid():
@@ -88,9 +87,6 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
 def results(request, question_id):

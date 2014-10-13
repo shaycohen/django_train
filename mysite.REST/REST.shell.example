@@ -1,5 +1,6 @@
 from polls.models import Question
-from polls.serializers import QuestionSerializer
+from polls.serializers import QuestionSerializer, QuestionModelSerializer
+#pip install djangorestframework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 q = Question.objects.get(pk=3)
@@ -22,5 +23,5 @@ newdata
 
 
 # ModelSerializer
-sered = QuestionModelSerializer(q)
+sered = QuestionModelSerializer(Question.objects.get(pk=1))
 

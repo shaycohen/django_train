@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect # Returns 302
+from django.core.urlresolvers import reverse # Anyone found out the maening of 'name' and 'namespace' under urls.py ? 
 from django.views import generic
 
 from polls.models import Choice, Question
@@ -30,15 +30,13 @@ def vote(request, question_id):
     except (KeyError, Choice.DoesNotExist):
         return render(request, 'polls/detail.html', {
             'question': p,
-            'error_message': "You didn't select a choice.",
+            'error_message': "Please choose!",
         })
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+        #HttpResponseRedirect returns 302
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

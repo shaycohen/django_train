@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from polls.models import Question
@@ -9,9 +7,9 @@ from django.template import RequestContext, loader
 def index(request):
     latest_poll_list = Question.objects.order_by('-pub_date')[:5]
     #Shortcut# template = loader.get_template('polls/index.html')
-    context = RequestContext(request, {
+    context = {
         'latest_poll_list': latest_poll_list,
-    })
+    }
     #Shortcut# return HttpResponse(template.render(context))
     return render(request, 'polls/index.html', context)
  

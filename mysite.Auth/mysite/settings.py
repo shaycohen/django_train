@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pipeline',
     'polls',
 )
 
@@ -81,4 +82,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+#STATIC_ROOT = '/tmp/static'
 STATIC_URL = '/static/'
+
+#STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE_CSS = {
+    'colors': {
+        'source_filenames': (
+          'core.css',
+          'addon.css',
+        ),
+        'output_filename': 'css/colors.css',
+    },
+}
+
+PIPELINE_JS = {
+    'scripts': {
+        'source_filenames': (
+          'jquery.js',
+          'alert.js',
+        ),
+        'output_filename': 'js/ui.js',
+    }
+}
+

@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/results/$', views.ResultsView.as_view(), name='results'),
     url(r'^(?P<question_id>\d+)/vote/$', views.vote, name='vote'),
     url(r'^json/$', views.question_list, name='jsonList'),
-    url(r'^json/(?P<pk>\d+)/$', views.question_detail, name='jsonDetail'),
+    url(r'^json/(?P<pk>\d+)/?$', views.question_detail, name='jsonDetail'),
 )
